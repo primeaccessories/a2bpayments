@@ -25,9 +25,9 @@ export default function HomePage() {
           loop
           muted
           playsInline
-          className="absolute inset-0 -z-20 h-full w-full object-cover opacity-50"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/60 via-ink/70 to-ink" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
 
         <AnimatePresence>
           {!maskGone && (
