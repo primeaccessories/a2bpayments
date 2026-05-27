@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { Menu, X, ArrowUpRight, Phone, Mail, MapPin } from 'lucide-react'
-import BrandLogo from '../components/BrandLogo'
 import TurboITPill from '../components/TurboITPill'
 import { LinkButton } from '../components/Button'
 
@@ -39,7 +38,7 @@ export default function MarketingLayout() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-          <BrandLogo />
+          <Link to="/" aria-label="Home" className="h-10 w-10" />
 
           <nav className="hidden items-center gap-1 lg:flex">
             {NAV.map((item) => (
@@ -117,8 +116,7 @@ export default function MarketingLayout() {
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <div>
-              <BrandLogo variant="dark" />
-              <p className="mt-6 max-w-sm text-pretty text-paper/70">
+              <p className="max-w-sm text-pretty text-paper/70">
                 Best-in-class card payments and business finance for UK businesses. Based in Blackpool, trusted across the country.
               </p>
               <div className="mt-6 flex flex-col gap-3 text-sm text-paper/70">
