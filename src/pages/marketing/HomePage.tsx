@@ -82,10 +82,11 @@ export default function HomePage() {
               src="/a2b-mask.svg"
               alt=""
               aria-hidden="true"
-              initial={{ scale: 5.5, opacity: 0 }}
+              initial={{ scale: 0.08, opacity: 0, filter: 'blur(14px)' }}
               animate={{
-                scale: [5.5, 1.25, 1.25],
+                scale: [0.08, 1.25, 1.25],
                 opacity: [0, 1, 1],
+                filter: ['blur(14px)', 'blur(0px)', 'blur(0px)'],
                 transition: {
                   duration: 2.0,
                   ease: [0.16, 1, 0.3, 1],
@@ -93,11 +94,12 @@ export default function HomePage() {
                 },
               }}
               exit={{
-                scale: 0.9,
+                scale: 2.6,
                 opacity: 0,
-                transition: { duration: 0.7, ease: [0.7, 0, 0.84, 0] },
+                filter: 'blur(6px)',
+                transition: { duration: 0.75, ease: [0.55, 0, 0.85, 0.1] },
               }}
-              className="pointer-events-none absolute inset-0 z-10 h-full w-full select-none object-cover"
+              className="pointer-events-none absolute inset-0 z-10 h-full w-full select-none object-cover will-change-transform"
               draggable={false}
             />
           )}
@@ -184,6 +186,46 @@ export default function HomePage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* PORTAL TEASE */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper p-8 sm:p-14">
+          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
+              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                Your account, your numbers, in one place.
+              </h2>
+              <p className="mt-4 max-w-xl text-pretty text-ink-muted sm:text-lg">
+                Existing A2B customers can sign in to see live settlements, manage terminals, check loan balances and raise support tickets — all on any device.
+              </p>
+              <ul className="mt-8 grid gap-3 text-sm text-ink sm:grid-cols-2">
+                {['Live transaction feed', 'Terminal health & status', 'Loan & cash advance balances', 'Statements & documents', 'Raise & track support tickets', 'Manage your team users'].map((line) => (
+                  <li key={line} className="inline-flex items-center gap-2">
+                    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint text-ink">
+                      <Check className="h-3 w-3" strokeWidth={3} />
+                    </span>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                <LinkButton to="/sign-in" variant="secondary" size="md">
+                  Sign in to your portal
+                </LinkButton>
+                <LinkButton to="/sign-up" variant="ghost" size="md">
+                  Create an account
+                  <ArrowUpRight className="h-4 w-4" />
+                </LinkButton>
+              </div>
+            </div>
+
+            <div className="relative hidden lg:block">
+              <PortalPreview />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -297,46 +339,6 @@ export default function HomePage() {
                 </GlassCard>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PORTAL TEASE */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper p-8 sm:p-14">
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
-              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-                Your account, your numbers, in one place.
-              </h2>
-              <p className="mt-4 max-w-xl text-pretty text-ink-muted sm:text-lg">
-                Existing A2B customers can sign in to see live settlements, manage terminals, check loan balances and raise support tickets — all on any device.
-              </p>
-              <ul className="mt-8 grid gap-3 text-sm text-ink sm:grid-cols-2">
-                {['Live transaction feed', 'Terminal health & status', 'Loan & cash advance balances', 'Statements & documents', 'Raise & track support tickets', 'Manage your team users'].map((line) => (
-                  <li key={line} className="inline-flex items-center gap-2">
-                    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint text-ink">
-                      <Check className="h-3 w-3" strokeWidth={3} />
-                    </span>
-                    {line}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <LinkButton to="/sign-in" variant="secondary" size="md">
-                  Sign in to your portal
-                </LinkButton>
-                <LinkButton to="/sign-up" variant="ghost" size="md">
-                  Create an account
-                  <ArrowUpRight className="h-4 w-4" />
-                </LinkButton>
-              </div>
-            </div>
-
-            <div className="relative hidden lg:block">
-              <PortalPreview />
-            </div>
           </div>
         </div>
       </section>
