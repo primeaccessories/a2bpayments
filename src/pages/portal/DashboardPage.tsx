@@ -77,7 +77,7 @@ export default function DashboardPage() {
           </div>
         </section>
 
-        <section className="rounded-2xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 text-paper ring-1 ring-white/10 backdrop-blur-xl">
+        <section className="rounded-2xl border border-ink/5 bg-ink p-6 text-paper">
           <p className="text-xs font-semibold uppercase tracking-wider text-mint">Your account manager</p>
           <p className="mt-3 font-display text-lg font-semibold">{MOCK_USER.accountManager}</p>
           <p className="text-sm text-paper/60">Client Partnership Lead</p>

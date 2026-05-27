@@ -44,7 +44,7 @@ export default function PortalLayout() {
   }
 
   return (
-    <div className="portal-dark flex min-h-[100dvh] bg-paper-soft">
+    <div className="flex min-h-[100dvh] bg-paper-soft">
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-72 transform border-r border-ink/5 bg-paper transition-transform lg:translate-x-0 ${
           open ? 'translate-x-0' : '-translate-x-full'
@@ -104,7 +104,7 @@ export default function PortalLayout() {
 
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}

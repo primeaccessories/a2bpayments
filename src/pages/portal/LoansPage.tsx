@@ -11,7 +11,7 @@ export default function LoansPage() {
         <p className="mt-2 text-ink-muted">Your live balance, repayments and funding options.</p>
       </header>
 
-      <section className="rounded-3xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-8 text-paper ring-1 ring-white/10 backdrop-blur-xl sm:p-10">
+      <section className="rounded-3xl bg-ink p-8 text-paper sm:p-10">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-mint">{MOCK_LOAN.product}</p>

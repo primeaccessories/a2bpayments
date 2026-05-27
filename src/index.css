@@ -97,34 +97,3 @@
 .auth-rotator {
   animation: auth-rotate-in 600ms ease-out both;
 }
-
-/* Customer portal = dark theme. Scoped palette inversion so every
-   bg-paper / text-ink / border-ink utility inside the portal renders
-   against a dark background without rewriting each page. */
-.portal-dark {
-  --color-paper: #0b0b0c;
-  --color-paper-soft: #0a0a0b;
-  --color-ink: #f6f7f7;
-  --color-ink-soft: #1a1a1b;
-  --color-ink-muted: #b6b9bc;
-  --color-ink-fade: #8a8d90;
-
-  background: var(--color-paper);
-  color: var(--color-ink);
-  color-scheme: dark;
-}
-.portal-dark .input {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--color-ink);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-.portal-dark .input:hover { border-color: rgba(255, 255, 255, 0.18); }
-.portal-dark .input:focus {
-  border-color: var(--color-mint);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 4px rgba(89, 209, 195, 0.22);
-}
-/* Lighter status-pill text so amber/teal/orange stay readable on the dark portal bg. */
-.portal-dark .text-mint-deep { color: var(--color-mint-bright); }
-.portal-dark .text-amber-700 { color: #fcd34d; }
-.portal-dark .text-orange-600 { color: #fb923c; }
