@@ -50,7 +50,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto max-w-7xl px-5 pt-20 pb-24 sm:px-8 sm:pt-28 sm:pb-32 lg:pt-36 lg:pb-40"
+          className="relative z-20 mx-auto max-w-7xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40 sm:pb-32 lg:pt-48 lg:pb-40"
         >
           <div className="max-w-3xl">
             <h1 className="font-display text-balance text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[1.05] tracking-tight text-paper">

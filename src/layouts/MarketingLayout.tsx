@@ -29,17 +29,22 @@ export default function MarketingLayout() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const isHome = location.pathname === '/'
+  const overlay = isHome && !scrolled
+
   return (
     <div className="flex min-h-[100dvh] flex-col bg-paper">
       <header
-        className={`sticky top-0 z-40 transition-all ${
-          scrolled
-            ? 'bg-paper/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
-            : 'bg-transparent'
+        className={`sticky top-0 z-40 transition-colors duration-300 ${
+          overlay
+            ? 'bg-transparent'
+            : scrolled
+              ? 'bg-paper/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
+              : 'bg-paper'
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-          <BrandLogo />
+          <BrandLogo variant={overlay ? 'dark' : 'light'} />
 
           <nav className="hidden items-center gap-1 lg:flex">
             {NAV.map((item) => (
@@ -49,8 +54,12 @@ export default function MarketingLayout() {
                 className={({ isActive }) =>
                   `rounded-full px-4 py-2 text-sm font-medium transition ${
                     isActive
-                      ? 'bg-ink text-paper'
-                      : 'text-ink-fade hover:bg-ink/5 hover:text-ink'
+                      ? overlay
+                        ? 'bg-paper text-ink'
+                        : 'bg-ink text-paper'
+                      : overlay
+                        ? 'text-paper/80 hover:bg-white/10 hover:text-paper'
+                        : 'text-ink-fade hover:bg-ink/5 hover:text-ink'
                   }`
                 }
               >
@@ -60,7 +69,12 @@ export default function MarketingLayout() {
           </nav>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <LinkButton to="/sign-in" variant="ghost" size="sm">
+            <LinkButton
+              to="/sign-in"
+              variant="ghost"
+              size="sm"
+              className={overlay ? 'text-paper hover:bg-white/10' : ''}
+            >
               Sign in
             </LinkButton>
             <LinkButton to="/contact" variant="primary" size="sm">
@@ -73,7 +87,11 @@ export default function MarketingLayout() {
             type="button"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 bg-paper text-ink lg:hidden"
+            className={`inline-flex h-11 w-11 items-center justify-center rounded-full border lg:hidden ${
+              overlay
+                ? 'border-white/20 bg-white/5 text-paper backdrop-blur'
+                : 'border-ink/10 bg-paper text-ink'
+            }`}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -109,7 +127,7 @@ export default function MarketingLayout() {
         )}
       </header>
 
-      <main className="flex-1">
+      <main className={`flex-1 ${isHome ? '-mt-[72px] sm:-mt-[80px]' : ''}`}>
         <Outlet />
       </main>
 
