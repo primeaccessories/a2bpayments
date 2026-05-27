@@ -42,7 +42,7 @@ export default function SupportPage() {
         ))}
       </div>
 
-      <section className="mt-10 rounded-2xl bg-ink p-6 text-paper sm:p-8">
+      <section className="mt-10 rounded-2xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 text-paper ring-1 ring-white/10 backdrop-blur-xl sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div className="max-w-md">
             <p className="text-xs font-semibold uppercase tracking-wider text-mint">Urgent?</p>
