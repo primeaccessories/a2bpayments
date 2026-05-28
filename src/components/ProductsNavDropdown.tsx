@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { ChevronDown, ArrowUpRight } from 'lucide-react'
 import { PRODUCTS } from '../lib/products'
 
@@ -16,6 +16,7 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<number | null>(null)
   const location = useLocation()
+  const navigate = useNavigate()
   const onProductsRoute = location.pathname.startsWith('/products')
 
   useEffect(() => {
@@ -49,6 +50,13 @@ export default function ProductsNavDropdown({ darkMode }: Props) {
     >
       <NavLink
         to="/products"
+        onClick={(e) => {
+          // Navigate explicitly so a press always reaches /products — the hover
+          // dropdown otherwise swallows the link's default activation.
+          e.preventDefault()
+          setOpen(false)
+          navigate('/products')
+        }}
         className={() =>
           `inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition ${
             onProductsRoute
