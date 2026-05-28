@@ -1,6 +1,6 @@
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowUpRight, Check, Phone } from 'lucide-react'
-import { productBySlug, PRODUCTS } from '../../lib/products'
+import { productBySlug, PRODUCTS, type ProductSection } from '../../lib/products'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 
@@ -82,24 +82,10 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* WHAT'S INCLUDED — bullet grid */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">
-            {isFinance ? 'How it works' : "What's included"}
-          </p>
-          <div className="mt-8 grid gap-x-14 gap-y-1 sm:grid-cols-2">
-            {product.bullets.map((b) => (
-              <div key={b} className="flex gap-4 border-t border-ink/10 py-6">
-                <span className="mt-0.5 inline-flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-mint/15 text-mint-deep">
-                  <Check className="h-4 w-4" strokeWidth={2.5} />
-                </span>
-                <span className="text-pretty text-ink">{b}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* RICH SECTIONS — full content cross-referenced to a2bpayments.co.uk */}
+      {product.sections.map((section, i) => (
+        <SectionBlock key={i} section={section} alt={i % 2 === 1} />
+      ))}
 
       {/* CTA BAND */}
       <section className="bg-ink text-paper">
@@ -164,5 +150,113 @@ export default function ProductDetailPage() {
         </section>
       )}
     </>
+  )
+}
+
+function SectionHeader({ eyebrow, heading }: { eyebrow?: string; heading: string }) {
+  return (
+    <div className="max-w-2xl">
+      {eyebrow && (
+        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">{eyebrow}</p>
+      )}
+      <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{heading}</h2>
+    </div>
+  )
+}
+
+function SectionBlock({ section, alt }: { section: ProductSection; alt: boolean }) {
+  const bg = alt ? 'bg-paper-soft' : 'bg-paper'
+
+  if (section.kind === 'prose') {
+    return (
+      <section className={bg}>
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+          <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
+          <p className="mt-6 max-w-3xl text-pretty text-lg text-ink-muted">{section.body}</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (section.kind === 'cards') {
+    return (
+      <section className={bg}>
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+          <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
+          <div className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {section.items.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl bg-paper p-7 ring-1 ring-ink/8 shadow-[0_18px_40px_-30px_rgba(15,23,30,0.4)]"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-mint/15 text-mint-deep">
+                  <Check className="h-4 w-4" strokeWidth={2.5} />
+                </span>
+                <h3 className="mt-5 font-display text-lg font-semibold tracking-tight text-ink">{item.title}</h3>
+                <p className="mt-2 text-pretty text-sm text-ink-muted">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (section.kind === 'list') {
+    return (
+      <section className={bg}>
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+          <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
+          <ul className="mt-8 grid gap-x-12 gap-y-1 sm:grid-cols-2">
+            {section.items.map((item) => (
+              <li key={item} className="flex items-center gap-4 border-t border-ink/10 py-4">
+                <span className="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-mint/15 text-mint-deep">
+                  <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
+                </span>
+                <span className="text-ink">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  if (section.kind === 'stats') {
+    return (
+      <section className="bg-ink text-paper">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+          {section.eyebrow && (
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint/80">{section.eyebrow}</p>
+          )}
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">{section.heading}</h2>
+          <div className="mt-10 grid gap-8 sm:grid-cols-3">
+            {section.items.map((item) => (
+              <div key={item.value} className="border-t border-white/15 pt-6">
+                <p className="font-display text-5xl font-semibold tracking-tight text-mint">{item.value}</p>
+                <p className="mt-3 text-pretty text-paper/65">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // faq
+  return (
+    <section className={bg}>
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <SectionHeader eyebrow={section.eyebrow} heading={section.heading} />
+        <div className="mt-8 max-w-3xl divide-y divide-ink/10 border-t border-ink/10">
+          {section.items.map((item) => (
+            <div key={item.q} className="py-6">
+              <h3 className="font-display text-lg font-semibold tracking-tight text-ink">{item.q}</h3>
+              <p className="mt-2 text-pretty text-ink-muted">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
