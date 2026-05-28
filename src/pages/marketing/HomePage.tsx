@@ -9,6 +9,7 @@ import { PRODUCTS } from '../../lib/products'
 import { TESTIMONIALS } from '../../lib/testimonials'
 
 const MASK_DURATION_MS = 4500
+const HERO_TEXT_DELAY_MS = 2000
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
@@ -75,6 +76,12 @@ export default function HomePage() {
   const [maskGone, setMaskGone] = useState(false)
   useEffect(() => {
     const t = setTimeout(() => setMaskGone(true), MASK_DURATION_MS)
+    return () => clearTimeout(t)
+  }, [])
+
+  const [textIn, setTextIn] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setTextIn(true), HERO_TEXT_DELAY_MS)
     return () => clearTimeout(t)
   }, [])
 
@@ -154,8 +161,8 @@ export default function HomePage() {
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          animate={textIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 pt-24 pb-8 sm:px-8 sm:pt-28 sm:pb-10 lg:pt-32"
         >
           <div className="max-w-4xl">
