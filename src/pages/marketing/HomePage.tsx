@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUpRight, Check, Phone, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 
@@ -210,6 +210,16 @@ export default function HomePage() {
     return () => document.removeEventListener('visibilitychange', onVisible)
   }, [src4kReady])
 
+  // Portal tease (mobile) — small scroll-driven parallax: the card and text drift
+  // at different speeds as the section passes through the viewport.
+  const portalRef = useRef<HTMLDivElement | null>(null)
+  const { scrollYProgress: portalProgress } = useScroll({
+    target: portalRef,
+    offset: ['start end', 'end start'],
+  })
+  const portalCardY = useTransform(portalProgress, [0, 1], [50, -50])
+  const portalTextY = useTransform(portalProgress, [0, 1], [24, -24])
+
   // Explore section — scroll-driven stack: each card scales down + blurs as the
   // next card rises to cover it, mirroring the og a2bpayments.co.uk transition.
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -300,7 +310,7 @@ export default function HomePage() {
           disableRemotePlayback
           x-webkit-airplay="deny"
           controls={false}
-          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-overlay-play-button]:!hidden [&::-webkit-media-controls-start-playback-button]:!hidden [&::-webkit-media-controls-panel]:!hidden"
+          className="pointer-events-none absolute inset-0 -z-20 hidden h-full w-full object-cover sm:block [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-overlay-play-button]:!hidden [&::-webkit-media-controls-start-playback-button]:!hidden [&::-webkit-media-controls-panel]:!hidden"
         >
           {src4kReady && (
             <>
@@ -311,6 +321,13 @@ export default function HomePage() {
           <source src="/a2b-intro.webm" type="video/webm" />
           <source src="/a2b-intro.mp4" type="video/mp4" />
         </video>
+        {/* Mobile: static poster instead of <video> — kills the native iOS/WhatsApp play overlay */}
+        <img
+          src="/a2b-intro.webp"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover sm:hidden"
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
 
         <motion.div
@@ -431,26 +448,28 @@ export default function HomePage() {
 
         <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:py-40">
           {/* MOBILE / TABLET — clean stack */}
-          <div className="flex flex-col items-center lg:hidden">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-[480px]"
-            >
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/45 via-mint/20 to-transparent blur-2xl sm:-inset-10"
-              />
-              <div className="absolute -top-3 right-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-paper shadow-xl ring-1 ring-mint/40">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
-                </span>
-                Live
-              </div>
-              <PortalPreview />
+          <div ref={portalRef} className="flex flex-col items-center lg:hidden">
+            <motion.div style={{ y: portalCardY }} className="w-full max-w-[480px]">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="relative w-full"
+              >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/45 via-mint/20 to-transparent blur-2xl sm:-inset-10"
+                />
+                <div className="absolute -top-3 right-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-paper shadow-xl ring-1 ring-mint/40">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+                  </span>
+                  Live
+                </div>
+                <PortalPreview />
+              </motion.div>
             </motion.div>
 
             <div
@@ -458,7 +477,7 @@ export default function HomePage() {
               className="my-8 h-10 w-px bg-gradient-to-b from-mint/0 via-mint-deep/50 to-mint/0"
             />
 
-            <div className="max-w-2xl text-center">
+            <motion.div style={{ y: portalTextY }} className="max-w-2xl text-center">
               <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
               <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
                 Your account, your numbers, <span className="text-mint-deep">in one place.</span>
@@ -485,7 +504,7 @@ export default function HomePage() {
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* DESKTOP — cinematic split */}
