@@ -87,10 +87,10 @@ export default function MarketingLayout() {
             type="button"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
-            className={`inline-flex h-11 w-11 items-center justify-center rounded-full border lg:hidden ${
+            className={`inline-flex h-11 w-11 items-center justify-center rounded-full transition lg:hidden ${
               darkMode
-                ? 'border-white/20 bg-white/5 text-paper backdrop-blur'
-                : 'border-ink/10 bg-paper text-ink'
+                ? 'bg-paper text-ink hover:bg-paper/90'
+                : 'bg-ink text-paper hover:bg-ink-soft'
             }`}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
