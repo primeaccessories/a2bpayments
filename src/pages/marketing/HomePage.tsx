@@ -7,10 +7,10 @@ import { LinkButton } from '../../components/Button'
 const MASK_DURATION_MS = 2600
 const HERO_TEXT_DELAY_MS = 2200
 
-// Module-scoped: resets on any full page load (incl. refresh / hard refresh),
-// but survives in-app route changes — so the intro replays on refresh yet is
-// skipped when navigating back to home from another page.
-let maskPlayedThisLoad = false
+// Plays once per browser tab session. A normal refresh keeps the flag, so the
+// intro is skipped and the scroll position is preserved; a fresh tab / new
+// session replays it.
+const MASK_SEEN_KEY = 'a2b-mask-seen'
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
@@ -139,11 +139,14 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
 ]
 
 export default function HomePage() {
-  const [maskGone, setMaskGone] = useState(maskPlayedThisLoad)
-  // Mark played on mount so navigating away mid-intro and back doesn't replay it.
-  useEffect(() => { maskPlayedThisLoad = true }, [])
+  const alreadySeen =
+    typeof window !== 'undefined' && sessionStorage.getItem(MASK_SEEN_KEY) === 'true'
+
+  const [maskGone, setMaskGone] = useState(alreadySeen)
   useEffect(() => {
     if (maskGone) return
+    // Mark seen immediately so a mid-intro route change + return doesn't replay it.
+    try { sessionStorage.setItem(MASK_SEEN_KEY, 'true') } catch { /* private mode */ }
     const t = setTimeout(() => setMaskGone(true), MASK_DURATION_MS)
     return () => clearTimeout(t)
   }, [maskGone])
@@ -171,7 +174,7 @@ export default function HomePage() {
     }
   }, [maskGone])
 
-  const [textIn, setTextIn] = useState(maskPlayedThisLoad)
+  const [textIn, setTextIn] = useState(alreadySeen)
   useEffect(() => {
     if (textIn) return
     const t = setTimeout(() => setTextIn(true), HERO_TEXT_DELAY_MS)
@@ -622,7 +625,7 @@ export default function HomePage() {
       {/* PAGES GRID — sticky-stack scroll, mirrors og a2bpayments.co.uk */}
       <section className="bg-paper-soft">
         <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8 sm:pt-24">
-          <div className="pb-20 sm:pb-24">
+          <div className="pb-10 sm:pb-12">
             {PAGES_GRID.map((p, i) => (
               <article key={p.title} className="sticky top-24 mb-10">
                 <div
@@ -662,8 +665,8 @@ export default function HomePage() {
       </section>
 
       {/* CTA STRIP */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-7xl px-5 pt-16 pb-10 sm:px-8 sm:pt-20 sm:pb-14">
+      <section className="bg-paper-soft">
+        <div className="mx-auto max-w-7xl px-5 pt-2 pb-12 sm:px-8 sm:pt-4 sm:pb-16">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-paper-soft via-paper to-paper p-10 ring-1 ring-ink/5 sm:p-14 lg:p-20">
             <div
               aria-hidden="true"
