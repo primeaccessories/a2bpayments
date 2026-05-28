@@ -1,7 +1,7 @@
-import { Quote, Star, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
-import { TESTIMONIALS } from '../../lib/testimonials'
+import TestimonialGrid from '../../components/TestimonialGrid'
 
 export default function TestimonialsPage() {
   return (
@@ -66,27 +66,7 @@ export default function TestimonialsPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
-        <div className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <GlassCard key={i} surface="light" className="p-7">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-b from-mint/30 via-mint/15 to-mint/5 text-mint-deep ring-1 ring-mint/20">
-                  <Quote className="h-4 w-4" strokeWidth={2} />
-                </span>
-                <div className="flex gap-0.5">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 fill-mint text-mint" />
-                  ))}
-                </div>
-              </div>
-              <blockquote className="mt-6 text-pretty text-ink">"{t.quote}"</blockquote>
-              <figcaption className="mt-6 border-t border-ink/5 pt-4 text-sm">
-                <p className="font-semibold text-ink">{t.name}</p>
-                <p className="text-ink-fade">{t.business}</p>
-              </figcaption>
-            </GlassCard>
-          ))}
-        </div>
+        <TestimonialGrid />
 
         <GlassCard surface="dark" className="mt-16 p-10 sm:p-14">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">

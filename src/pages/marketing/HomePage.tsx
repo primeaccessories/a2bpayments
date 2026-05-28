@@ -1,12 +1,12 @@
-import { ArrowDown, ArrowUpRight, Check, HeartHandshake, Phone, ShieldCheck, Star, Quote, Zap } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, HeartHandshake, Phone, ShieldCheck, Star, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import GlassIcon from '../../components/GlassIcon'
+import TestimonialGrid from '../../components/TestimonialGrid'
 import { PRODUCTS } from '../../lib/products'
-import { TESTIMONIALS } from '../../lib/testimonials'
 
 const MASK_DURATION_MS = 4500
 const HERO_TEXT_DELAY_MS = 4400
@@ -600,18 +600,7 @@ export default function HomePage() {
             Talk to anyone we've worked with.
           </h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.slice(0, 3).map((t) => (
-            <figure key={t.name} className="rounded-3xl border border-ink/5 bg-paper p-7">
-              <Quote className="h-6 w-6 text-mint-deep" />
-              <blockquote className="mt-4 text-pretty text-ink">{t.quote}</blockquote>
-              <figcaption className="mt-6 text-sm">
-                <p className="font-semibold text-ink">{t.name}</p>
-                <p className="text-ink-fade">{t.business}</p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <TestimonialGrid limit={3} />
         <div className="mt-8 text-center">
           <Link to="/testimonials" className="text-sm font-semibold text-ink underline-offset-4 hover:underline">
             Read more stories →
