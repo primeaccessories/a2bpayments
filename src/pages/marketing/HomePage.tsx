@@ -121,13 +121,20 @@ export default function HomePage() {
       <div className="flex min-h-[100dvh] flex-col bg-ink">
       {/* HERO */}
       <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-ink text-paper">
-        <img
-          src="/a2b-intro.webp"
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="pointer-events-none absolute inset-0 -z-20 h-full w-full select-none object-cover"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/a2b-intro.webp"
+          disablePictureInPicture
+          controls={false}
+          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover"
+        >
+          <source src="/a2b-intro.mp4" type="video/mp4" />
+          <source src="/a2b-intro.webm" type="video/webm" />
+        </video>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
 
         <motion.div
