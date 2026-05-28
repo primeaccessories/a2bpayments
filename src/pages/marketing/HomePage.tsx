@@ -98,12 +98,12 @@ export default function HomePage() {
               aria-hidden="true"
               initial={{ scale: 1.0, opacity: 1 }}
               animate={{
-                scale: [1.0, 1.0, 2.4],
+                scale: [1.0, 1.0, 3.5],
                 opacity: [1, 1, 0],
                 transition: {
                   duration: 2.6,
-                  ease: [0.6, 0, 0.35, 1],
-                  times: [0, 0.82, 1],
+                  ease: [0.72, 0, 0.28, 1],
+                  times: [0, 0.78, 1],
                 },
               }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
@@ -117,7 +117,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto flex min-h-[88svh] max-w-7xl flex-col px-5 pt-24 pb-12 sm:px-8 sm:pt-40 sm:pb-16 lg:pt-44"
+          className="relative z-20 mx-auto flex min-h-[72svh] max-w-7xl flex-col px-5 pt-20 pb-10 sm:px-8 sm:pt-32 sm:pb-12 lg:pt-36"
         >
           <div className="max-w-4xl">
             <TrustpilotBadge />

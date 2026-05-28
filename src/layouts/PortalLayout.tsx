@@ -52,7 +52,7 @@ export default function PortalLayout() {
       >
         <div className="flex h-full flex-col">
           <div className="flex h-16 items-center justify-between border-b border-ink/5 px-6">
-            <BrandLogo />
+            <BrandLogo hardNav />
             <button
               type="button"
               onClick={() => setOpen(false)}
@@ -111,7 +111,6 @@ export default function PortalLayout() {
 
       <div className="flex flex-1 flex-col lg:pl-72">
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-ink/5 bg-paper/80 px-5 backdrop-blur-md sm:px-8 lg:hidden">
-          <BrandLogo />
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -120,6 +119,7 @@ export default function PortalLayout() {
           >
             <Menu className="h-5 w-5" />
           </button>
+          <BrandLogo hardNav />
         </header>
 
         <main className="flex-1 px-5 py-8 sm:px-8 lg:py-12">
