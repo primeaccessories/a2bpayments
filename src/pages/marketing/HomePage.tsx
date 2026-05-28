@@ -107,6 +107,30 @@ export default function HomePage() {
 
   return (
     <>
+      {/* A2B LOADING MASK — full-viewport overlay, sits under the sticky header */}
+      <AnimatePresence>
+        {!maskGone && (
+          <motion.img
+            key="hero-a2b-mask"
+            src="/a2b-mask.svg"
+            alt=""
+            aria-hidden="true"
+            initial={{ scale: 1.0, opacity: 1 }}
+            animate={{
+              scale: 5.5,
+              opacity: 0,
+              transition: {
+                scale: { duration: 2.4, delay: 2.0, ease: [0.42, 0, 0.6, 1] },
+                opacity: { duration: 2.4, delay: 2.0, ease: [0.5, 0, 0.9, 1] },
+              },
+            }}
+            exit={{ opacity: 0, transition: { duration: 0.05 } }}
+            className="pointer-events-none fixed inset-0 z-30 h-full w-full select-none object-cover will-change-transform"
+            draggable={false}
+          />
+        )}
+      </AnimatePresence>
+
       {/* HERO + MARQUEE — one viewport-tall landing block */}
       <div className="flex min-h-[100dvh] flex-col bg-ink">
       {/* HERO */}
@@ -127,29 +151,6 @@ export default function HomePage() {
           <source src="/a2b-intro.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
-
-        <AnimatePresence>
-          {!maskGone && (
-            <motion.img
-              key="hero-a2b-mask"
-              src="/a2b-mask.svg"
-              alt=""
-              aria-hidden="true"
-              initial={{ scale: 1.0, opacity: 1 }}
-              animate={{
-                scale: 5.5,
-                opacity: 0,
-                transition: {
-                  scale: { duration: 2.4, delay: 2.0, ease: [0.42, 0, 0.6, 1] },
-                  opacity: { duration: 2.4, delay: 2.0, ease: [0.5, 0, 0.9, 1] },
-                },
-              }}
-              exit={{ opacity: 0, transition: { duration: 0.05 } }}
-              className="pointer-events-none absolute inset-0 z-10 h-full w-full select-none object-cover will-change-transform"
-              draggable={false}
-            />
-          )}
-        </AnimatePresence>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
