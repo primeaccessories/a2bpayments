@@ -6,7 +6,11 @@ import { LinkButton } from '../../components/Button'
 
 const MASK_DURATION_MS = 4500
 const HERO_TEXT_DELAY_MS = 4400
-const MASK_SEEN_KEY = 'a2b-mask-seen'
+
+// Module-scoped: resets on any full page load (incl. refresh / hard refresh),
+// but survives in-app route changes — so the intro replays on refresh yet is
+// skipped when navigating back to home from another page.
+let maskPlayedThisLoad = false
 
 const SUBLINES = [
   'Lower rates, faster settlements, and support you can actually reach.',
@@ -135,16 +139,12 @@ const TRUST_ROWS: { label: string; duration: number; reverse?: boolean; items: s
 ]
 
 export default function HomePage() {
-  const alreadySeen =
-    typeof window !== 'undefined' && sessionStorage.getItem(MASK_SEEN_KEY) === 'true'
-
-  const [maskGone, setMaskGone] = useState(alreadySeen)
+  const [maskGone, setMaskGone] = useState(maskPlayedThisLoad)
+  // Mark played on mount so navigating away mid-intro and back doesn't replay it.
+  useEffect(() => { maskPlayedThisLoad = true }, [])
   useEffect(() => {
     if (maskGone) return
-    const t = setTimeout(() => {
-      setMaskGone(true)
-      try { sessionStorage.setItem(MASK_SEEN_KEY, 'true') } catch { /* private mode */ }
-    }, MASK_DURATION_MS)
+    const t = setTimeout(() => setMaskGone(true), MASK_DURATION_MS)
     return () => clearTimeout(t)
   }, [maskGone])
 
@@ -164,7 +164,7 @@ export default function HomePage() {
     }
   }, [maskGone])
 
-  const [textIn, setTextIn] = useState(alreadySeen)
+  const [textIn, setTextIn] = useState(maskPlayedThisLoad)
   useEffect(() => {
     if (textIn) return
     const t = setTimeout(() => setTextIn(true), HERO_TEXT_DELAY_MS)
