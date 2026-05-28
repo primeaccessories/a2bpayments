@@ -4,9 +4,9 @@ import { Menu, X, ArrowUpRight, Phone, Mail, MapPin } from 'lucide-react'
 import BrandLogo from '../components/BrandLogo'
 import TurboITPill from '../components/TurboITPill'
 import { LinkButton } from '../components/Button'
+import ProductsNavDropdown from '../components/ProductsNavDropdown'
 
 const NAV = [
-  { to: '/products', label: 'Products' },
   { to: '/team', label: 'Our team' },
   { to: '/testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Contact' },
@@ -46,6 +46,7 @@ export default function MarketingLayout() {
           <BrandLogo variant={darkMode ? 'dark' : 'light'} />
 
           <nav className="hidden items-center gap-1 lg:flex">
+            <ProductsNavDropdown darkMode={darkMode} />
             {NAV.map((item) => (
               <NavLink
                 key={item.to}
@@ -99,6 +100,16 @@ export default function MarketingLayout() {
         {open && (
           <div className="border-t border-ink/5 bg-paper lg:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 sm:px-8">
+              <NavLink
+                to="/products"
+                className={({ isActive }) =>
+                  `rounded-xl px-4 py-3 text-base font-medium ${
+                    isActive ? 'bg-ink text-paper' : 'text-ink hover:bg-ink/5'
+                  }`
+                }
+              >
+                Products
+              </NavLink>
               {NAV.map((item) => (
                 <NavLink
                   key={item.to}
