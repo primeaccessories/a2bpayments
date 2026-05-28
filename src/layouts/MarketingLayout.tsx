@@ -30,14 +30,18 @@ export default function MarketingLayout() {
   }, [])
 
   const isHome = location.pathname === '/'
-  const darkMode = isHome
-  const headerBg = isHome
-    ? scrolled
-      ? 'bg-ink/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(255,255,255,0.06)]'
-      : 'bg-transparent'
-    : scrolled
-      ? 'bg-paper/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
-      : 'bg-paper'
+  // Once the mobile menu opens, the panel below is light (bg-paper) — flip the
+  // header to match so the hamburger doesn't sit in a dark strip above a white slab.
+  const darkMode = isHome && !open
+  const headerBg = open
+    ? 'bg-paper'
+    : isHome
+      ? scrolled
+        ? 'bg-ink/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(255,255,255,0.06)]'
+        : 'bg-transparent'
+      : scrolled
+        ? 'bg-paper/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
+        : 'bg-paper'
 
   return (
     <div className="flex min-h-[100dvh] flex-col bg-paper">

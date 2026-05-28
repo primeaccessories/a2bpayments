@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUpRight, Check, HeartHandshake, Phone, ShieldCheck, Star, Quote, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../../components/Button'
 import GlassCard from '../../components/GlassCard'
 import GlassIcon from '../../components/GlassIcon'
@@ -84,6 +84,27 @@ export default function HomePage() {
     return () => clearInterval(id)
   }, [])
 
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.muted = true
+    v.defaultMuted = true
+    v.setAttribute('muted', '')
+    v.setAttribute('playsinline', '')
+    v.setAttribute('webkit-playsinline', '')
+    const tryPlay = () => v.play().catch(() => undefined)
+    tryPlay()
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') tryPlay()
+    }
+    document.addEventListener('visibilitychange', onVisible)
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true })
+    return () => {
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [])
+
   return (
     <>
       {/* HERO + MARQUEE — one viewport-tall landing block */}
@@ -91,14 +112,16 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-ink text-paper">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
+          poster="/a2b-poster.jpg"
           disablePictureInPicture
           controls={false}
-          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-start-playback-button]:hidden [&::-webkit-media-controls-overlay-play-button]:hidden"
         >
           <source src="/a2b-intro.mp4" type="video/mp4" />
           <source src="/a2b-intro.webm" type="video/webm" />
