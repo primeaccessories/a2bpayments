@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Check, Phone, Play, Star } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check, Phone, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
@@ -179,7 +179,6 @@ export default function HomePage() {
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [src4kReady, setSrc4kReady] = useState(false)
-  const [videoPlaying, setVideoPlaying] = useState(false)
   useEffect(() => {
     fetch('/a2b-intro-2160.mp4', { method: 'HEAD' })
       .then((r) => { if (r.ok) setSrc4kReady(true) })
@@ -291,8 +290,6 @@ export default function HomePage() {
           disableRemotePlayback
           x-webkit-airplay="deny"
           controls={false}
-          onPlay={() => setVideoPlaying(true)}
-          onPause={() => setVideoPlaying(false)}
           className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-overlay-play-button]:!hidden [&::-webkit-media-controls-start-playback-button]:!hidden [&::-webkit-media-controls-panel]:!hidden"
         >
           {src4kReady && (
@@ -360,18 +357,6 @@ export default function HomePage() {
             </div>
           </div>
         </motion.div>
-
-        {/* Mobile tap-to-play — shows only when autoplay is blocked (WhatsApp / iOS Low Power) */}
-        {!videoPlaying && (
-          <button
-            type="button"
-            onClick={() => videoRef.current?.play().catch(() => undefined)}
-            aria-label="Play intro video"
-            className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 inline-flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full bg-paper/15 text-paper shadow-[0_8px_30px_-6px_rgba(0,0,0,0.5)] ring-1 ring-paper/40 backdrop-blur-md transition active:scale-95 sm:hidden"
-          >
-            <Play className="ml-1 h-9 w-9 fill-current" strokeWidth={0} />
-          </button>
-        )}
       </section>
 
       {/* TRUST MARQUEE — anchored to the bottom of the landing block */}
