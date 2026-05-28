@@ -8,12 +8,12 @@ export default function TeamPage() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 sm:pt-24 sm:pb-20">
+      <section className="mx-auto max-w-7xl px-5 pt-12 pb-6 sm:px-8 sm:pt-16 sm:pb-8">
         <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Our team</p>
-        <h1 className="mt-4 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
+        <h1 className="mt-3 font-display text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
           A team that <span className="text-mint-deep">genuinely cares</span> about your business.
         </h1>
-        <p className="mt-6 max-w-2xl text-pretty text-lg text-ink-muted">
+        <p className="mt-5 max-w-2xl text-pretty text-lg text-ink-muted">
           We're a Blackpool-based team with a simple belief: if you want to be successful, you've got to genuinely care
           about the people you work with. Here are the people you'll deal with.
         </p>
@@ -24,20 +24,20 @@ export default function TeamPage() {
           aria-hidden="true"
           className="pointer-events-none absolute left-0 top-1/3 h-[400px] w-[400px] -translate-x-1/3 rounded-full bg-mint/20 blur-[120px]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Founders</p>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
             Built A2B from the ground up.
           </h2>
 
-          <div className="mt-10 grid gap-6 sm:gap-8 md:grid-cols-2">
+          <div className="mt-8 grid gap-6 sm:gap-8 md:grid-cols-2">
             {founders.map((m) => (
               <GlassCard key={m.name} surface="light" className="overflow-hidden p-0">
                 <Portrait name={m.name} image={m.image} ratio="4/5" />
-                <div className="p-8">
+                <div className="p-7">
                   <h3 className="font-display text-2xl font-semibold tracking-tight text-ink">{m.name}</h3>
                   <p className="mt-1 text-sm font-medium uppercase tracking-[0.18em] text-mint-deep">{m.role}</p>
-                  {m.bio && <p className="mt-5 text-pretty text-ink-muted">{m.bio}</p>}
+                  {m.bio && <p className="mt-4 text-pretty text-ink-muted">{m.bio}</p>}
                 </div>
               </GlassCard>
             ))}
@@ -46,19 +46,19 @@ export default function TeamPage() {
       </section>
 
       {leads.length > 0 && (
-        <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">Leadership</p>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             The heads behind A2B
           </h2>
 
-          <div className="mt-10 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-8 grid gap-5 grid-cols-2 sm:grid-cols-3">
             {leads.map((m) => (
               <GlassCard key={m.name} surface="light" interactive className="overflow-hidden p-0">
                 <Portrait name={m.name} image={m.image} ratio="1/1" />
-                <div className="p-3 sm:p-4">
-                  <p className="text-sm font-semibold text-ink leading-tight">{m.name}</p>
-                  <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.1em] text-mint-deep leading-snug">{m.role}</p>
+                <div className="p-4 sm:p-5">
+                  <p className="font-display text-base font-semibold tracking-tight text-ink leading-tight sm:text-lg">{m.name}</p>
+                  <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-mint-deep leading-snug">{m.role}</p>
                 </div>
               </GlassCard>
             ))}
@@ -67,21 +67,21 @@ export default function TeamPage() {
       )}
 
       <section className="border-t border-ink/5 bg-paper-soft/40">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mint-deep">The team</p>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             The people you'll deal with
           </h2>
-          <p className="mt-3 text-ink-muted">Account managers, specialists and support — your day-to-day A2B contacts.</p>
+          <p className="mt-2 text-ink-muted">Account managers, specialists and support — your day-to-day A2B contacts.</p>
 
-          <div className="mt-10 grid gap-3 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-10">
+          <div className="mt-8 grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {rest.map((m) => (
               <div key={m.name} className="group">
                 <div className="overflow-hidden rounded-2xl ring-1 ring-ink/5 transition group-hover:ring-mint/40 group-hover:shadow-[0_12px_30px_-15px_rgba(15,23,42,0.25)]">
                   <Portrait name={m.name} image={m.image} ratio="1/1" />
                 </div>
-                <p className="mt-2 text-xs font-semibold text-ink leading-tight">{m.name}</p>
-                <p className="text-[10.5px] text-ink-fade leading-snug">{m.role}</p>
+                <p className="mt-2.5 text-sm font-semibold text-ink leading-tight">{m.name}</p>
+                <p className="text-xs text-ink-fade leading-snug">{m.role}</p>
               </div>
             ))}
           </div>
