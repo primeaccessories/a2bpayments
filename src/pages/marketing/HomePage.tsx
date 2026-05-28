@@ -92,6 +92,12 @@ export default function HomePage() {
   }, [])
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [src4kReady, setSrc4kReady] = useState(false)
+  useEffect(() => {
+    fetch('/a2b-intro-2160.mp4', { method: 'HEAD' })
+      .then((r) => { if (r.ok) setSrc4kReady(true) })
+      .catch(() => undefined)
+  }, [])
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
@@ -106,7 +112,7 @@ export default function HomePage() {
     document.addEventListener('visibilitychange', onVisible)
     document.addEventListener('touchstart', tryPlay, { once: true, passive: true })
     return () => document.removeEventListener('visibilitychange', onVisible)
-  }, [])
+  }, [src4kReady])
 
   return (
     <>
@@ -139,6 +145,7 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative isolate flex flex-1 flex-col overflow-hidden bg-ink text-paper">
         <video
+          key={src4kReady ? '4k' : 'hd'}
           ref={videoRef}
           autoPlay
           loop
@@ -152,8 +159,14 @@ export default function HomePage() {
           controls={false}
           className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-overlay-play-button]:!hidden [&::-webkit-media-controls-start-playback-button]:!hidden [&::-webkit-media-controls-panel]:!hidden"
         >
-          <source src="/a2b-intro.mp4" type="video/mp4" />
+          {src4kReady && (
+            <>
+              <source src="/a2b-intro-2160.webm" type="video/webm" media="(min-width: 1024px), (min-resolution: 2dppx)" />
+              <source src="/a2b-intro-2160.mp4" type="video/mp4" media="(min-width: 1024px), (min-resolution: 2dppx)" />
+            </>
+          )}
           <source src="/a2b-intro.webm" type="video/webm" />
+          <source src="/a2b-intro.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/20 via-ink/40 to-ink" />
 
