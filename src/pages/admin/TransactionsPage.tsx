@@ -41,7 +41,7 @@ export default function AdminTransactionsPage() {
         title="Transactions"
         subtitle="Every authorisation across the estate. Filter, search, export."
         actions={
-          <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-4 py-2 text-sm font-semibold text-ink hover:bg-ink/5">
+          <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-4 py-2.5 text-sm font-semibold text-ink hover:bg-ink/5">
             <Download className="h-4 w-4" /> Export CSV
           </button>
         }

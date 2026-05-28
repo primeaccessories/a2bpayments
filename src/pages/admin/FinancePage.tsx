@@ -12,7 +12,7 @@ export default function AdminFinancePage() {
         title="Finance & cash advances"
         subtitle="The advance book — deployed capital, repayment progress and underwriting queue."
         actions={
-          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper hover:bg-ink-soft">
+          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper hover:bg-ink-soft">
             <Plus className="h-4 w-4" /> Originate advance
           </button>
         }
@@ -46,18 +46,18 @@ export default function AdminFinancePage() {
                     {a.percentOfCard}% of card receipts · Started {a.startedAt} · Est. complete {a.estimatedEnd}
                   </p>
                 </div>
-                <div className="grid grid-cols-3 gap-4 text-right">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 text-left sm:text-right">
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-ink-fade">Advanced</p>
-                    <p className="font-mono font-semibold text-ink">{gbp(a.advanced, { maximumFractionDigits: 0 })}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-fade sm:text-[11px]">Advanced</p>
+                    <p className="font-mono text-sm font-semibold text-ink sm:text-base">{gbp(a.advanced, { maximumFractionDigits: 0 })}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-ink-fade">Repaid</p>
-                    <p className="font-mono font-semibold text-mint-deep">{gbp(a.repaid, { maximumFractionDigits: 0 })}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-fade sm:text-[11px]">Repaid</p>
+                    <p className="font-mono text-sm font-semibold text-mint-deep sm:text-base">{gbp(a.repaid, { maximumFractionDigits: 0 })}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-ink-fade">Remaining</p>
-                    <p className="font-mono font-semibold text-ink">{gbp(a.remaining, { maximumFractionDigits: 0 })}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-fade sm:text-[11px]">Remaining</p>
+                    <p className="font-mono text-sm font-semibold text-ink sm:text-base">{gbp(a.remaining, { maximumFractionDigits: 0 })}</p>
                   </div>
                 </div>
               </div>

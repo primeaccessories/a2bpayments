@@ -33,10 +33,10 @@ export default function AdminTerminalsPage() {
         subtitle="Every device — deployed, in stock, in transit or in for repair."
         actions={
           <>
-            <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-4 py-2 text-sm font-semibold text-ink hover:bg-ink/5">
+            <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-4 py-2.5 text-sm font-semibold text-ink hover:bg-ink/5">
               <PackageOpen className="h-4 w-4" /> Bulk import
             </button>
-            <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper hover:bg-ink-soft">
+            <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper hover:bg-ink-soft">
               <Plus className="h-4 w-4" /> Register terminal
             </button>
           </>

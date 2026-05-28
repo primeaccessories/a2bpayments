@@ -42,10 +42,10 @@ export default function AdminMerchantDetailPage() {
         subtitle={`MID ${m.mid} · joined ${new Date(m.joinedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}`}
         actions={
           <>
-            <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-4 py-2 text-sm font-semibold text-ink hover:bg-ink/5">
+            <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-4 py-2.5 text-sm font-semibold text-ink hover:bg-ink/5">
               <Pencil className="h-4 w-4" /> Edit
             </button>
-            <button className="inline-flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-700 hover:bg-rose-100">
+            <button className="inline-flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700 hover:bg-rose-100">
               Suspend MID
             </button>
           </>
@@ -182,7 +182,7 @@ export default function AdminMerchantDetailPage() {
                 <MapPin className="h-4 w-4 text-ink-fade" /> {m.city}
               </p>
             </div>
-            <button className="mt-5 w-full rounded-xl border border-ink/10 bg-paper px-4 py-2 text-sm font-semibold text-ink hover:bg-ink/5">
+            <button className="mt-5 w-full rounded-xl border border-ink/10 bg-paper px-4 py-2.5 text-sm font-semibold text-ink hover:bg-ink/5">
               Send message
             </button>
           </Card>

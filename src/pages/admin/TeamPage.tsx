@@ -48,7 +48,7 @@ export default function AdminTeamPage() {
         title="Team & roles"
         subtitle="Internal users and the permissions they hold."
         actions={
-          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper hover:bg-ink-soft">
+          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper hover:bg-ink-soft">
             <Plus className="h-4 w-4" /> Invite team member
           </button>
         }

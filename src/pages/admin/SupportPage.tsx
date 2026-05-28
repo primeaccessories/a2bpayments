@@ -37,7 +37,7 @@ export default function AdminSupportPage() {
         title="Support queue"
         subtitle="All merchant tickets across the estate."
         actions={
-          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper hover:bg-ink-soft">
+          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper hover:bg-ink-soft">
             <Plus className="h-4 w-4" /> Raise on behalf
           </button>
         }

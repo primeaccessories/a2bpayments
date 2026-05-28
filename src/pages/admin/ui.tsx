@@ -190,7 +190,7 @@ export function ChipFilter<T extends string>({
             key={o.value}
             type="button"
             onClick={() => onChange(o.value)}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+            className={`inline-flex min-h-[40px] items-center justify-center rounded-full px-4 text-xs font-semibold transition sm:min-h-[34px] sm:py-1.5 ${
               active ? 'bg-ink text-paper' : 'bg-paper-soft text-ink-muted hover:bg-ink/10'
             }`}
           >

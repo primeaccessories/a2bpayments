@@ -38,7 +38,7 @@ export default function AdminApplicationsPage() {
         title="Applications & onboarding"
         subtitle="New merchant signups moving through KYC and underwriting."
         actions={
-          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper hover:bg-ink-soft">
+          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper hover:bg-ink-soft">
             <FileText className="h-4 w-4" /> New application
           </button>
         }
@@ -96,16 +96,16 @@ export default function AdminApplicationsPage() {
                   {a.id} · submitted {a.submittedAt} · assigned to {a.assignedTo}
                 </p>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="text-right">
+              <div className="flex flex-wrap items-center justify-between gap-3 sm:justify-end sm:gap-4">
+                <div className="sm:text-right">
                   <p className="text-[11px] uppercase tracking-wider text-ink-fade">Est. monthly volume</p>
                   <p className="font-mono font-semibold text-ink">{gbp(a.estimatedMonthlyVolume, { maximumFractionDigits: 0 })}</p>
                 </div>
                 <div className="flex gap-2">
-                  <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-3 py-1.5 text-xs font-semibold text-ink hover:bg-ink/5">
+                  <button className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper px-3.5 py-2 text-xs font-semibold text-ink hover:bg-ink/5">
                     <Mail className="h-3.5 w-3.5" /> Email
                   </button>
-                  <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-paper hover:bg-ink-soft">
+                  <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-xs font-semibold text-paper hover:bg-ink-soft">
                     Review <ChevronRight className="h-3.5 w-3.5" />
                   </button>
                 </div>

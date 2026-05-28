@@ -61,7 +61,7 @@ export default function AdminDashboardPage() {
         actions={
           <Link
             to="/admin/applications"
-            className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper hover:bg-ink-soft"
+            className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper hover:bg-ink-soft"
           >
             <FileText className="h-4 w-4" />
             Review applications · {newApps}
