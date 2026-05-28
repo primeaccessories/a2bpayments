@@ -125,7 +125,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={maskGone ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pt-24 pb-10 sm:min-h-[88svh] sm:px-8 sm:pt-32 sm:pb-12 lg:pt-36"
+          className="relative z-20 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-5 pt-24 pb-10 sm:min-h-[68svh] sm:px-8 sm:pt-28 sm:pb-10 lg:min-h-[62svh] lg:pt-32"
         >
           <div className="max-w-4xl">
             <TrustpilotBadge />
@@ -221,35 +221,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PORTAL TEASE */}
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-mint/15 via-paper to-paper px-6 pt-16 pb-10 sm:px-14 sm:pt-24 sm:pb-16">
-          {/* ambient glow orbs */}
-          <div
-            className="pointer-events-none absolute -top-24 right-[-10%] h-72 w-72 rounded-full bg-mint/25 blur-3xl sm:h-[28rem] sm:w-[28rem]"
-            aria-hidden="true"
-          />
-          <div
-            className="pointer-events-none absolute -bottom-32 left-[-12%] h-72 w-72 rounded-full bg-mint/15 blur-3xl sm:h-[28rem] sm:w-[28rem]"
-            aria-hidden="true"
-          />
+      {/* PORTAL TEASE — cinematic dashboard cluster */}
+      <section className="relative overflow-hidden bg-ink text-paper">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(89,209,195,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(89,209,195,0.07)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_70%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-40 right-[-15%] h-[40rem] w-[40rem] rounded-full bg-mint/25 blur-[140px]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-40 left-[-15%] h-[40rem] w-[40rem] rounded-full bg-mint-deep/20 blur-[140px]"
+        />
 
-          <div className="relative flex flex-col items-center">
-            {/* PREVIEW with floating halo + live pill */}
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:py-40">
+          {/* MOBILE / TABLET — clean stack */}
+          <div className="flex flex-col items-center lg:hidden">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-[520px]"
+              className="relative w-full max-w-[480px]"
             >
-              {/* mint halo behind the screenshot */}
               <div
-                className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/40 via-mint/20 to-transparent blur-2xl sm:-inset-10"
                 aria-hidden="true"
+                className="pointer-events-none absolute -inset-6 -z-10 bg-gradient-to-tr from-mint/45 via-mint/20 to-transparent blur-2xl sm:-inset-10"
               />
-              {/* live pill */}
-              <div className="absolute -top-3 right-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-paper shadow-xl ring-1 ring-white/10">
+              <div className="absolute -top-3 right-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink shadow-xl ring-1 ring-mint/30">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
@@ -259,23 +260,20 @@ export default function HomePage() {
               <PortalPreview />
             </motion.div>
 
-            {/* connector line bridging image → text */}
             <div
               aria-hidden="true"
-              className="my-8 h-10 w-px bg-gradient-to-b from-mint/0 via-mint-deep/40 to-mint/0 sm:my-10"
+              className="my-8 h-10 w-px bg-gradient-to-b from-mint/0 via-mint/40 to-mint/0"
             />
 
-            {/* TEXT */}
-            <div className="max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-wider text-mint-deep">Customer portal</p>
-              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-                Your account, your numbers, in one place.
+            <div className="max-w-2xl text-center">
+              <p className="text-xs font-semibold uppercase tracking-wider text-mint">Customer portal</p>
+              <h2 className="mt-3 font-display text-balance text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
+                Your account, your numbers, <span className="text-mint">in one place.</span>
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-pretty text-ink-muted sm:text-lg">
+              <p className="mx-auto mt-4 max-w-xl text-pretty text-paper/70 sm:text-lg">
                 Sign in to see live settlements, manage terminals, check loan balances and raise support tickets — on any device.
               </p>
-
-              <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-ink sm:grid-cols-2">
+              <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left text-sm text-paper/90 sm:grid-cols-2">
                 {PORTAL_FEATURES.map((line) => (
                   <li key={line} className="inline-flex items-center gap-2">
                     <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
@@ -285,12 +283,143 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-
               <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                <LinkButton to="/sign-in" variant="secondary" size="md">
+                <LinkButton to="/sign-in" variant="primary" size="md">
                   Sign in to your portal
                 </LinkButton>
-                <LinkButton to="/sign-up" variant="ghost" size="md">
+                <LinkButton to="/sign-up" variant="inverse" size="md">
+                  Create an account
+                  <ArrowUpRight className="h-4 w-4" />
+                </LinkButton>
+              </div>
+            </div>
+          </div>
+
+          {/* DESKTOP — cinematic split */}
+          <div className="hidden lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 xl:gap-24">
+            {/* LEFT — floating dashboard cluster */}
+            <div className="relative h-[620px] xl:h-[680px]">
+              <motion.div
+                initial={{ opacity: 0, y: 30, rotateY: -22 }}
+                whileInView={{ opacity: 1, y: 0, rotateY: -8 }}
+                viewport={{ once: true, margin: '-120px' }}
+                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+                style={{ transformPerspective: 2000, rotateX: 4, transformOrigin: 'left center' }}
+                className="absolute left-0 top-1/2 z-10 w-[480px] -translate-y-1/2 xl:w-[520px]"
+              >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-10 -z-10 bg-gradient-to-tr from-mint/35 via-mint/15 to-transparent blur-3xl"
+                />
+                <div className="absolute -top-3 left-6 z-30 inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink shadow-2xl ring-1 ring-mint/30">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+                  </span>
+                  Portal · Live
+                </div>
+                <PortalPreview />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12, x: 24 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true, margin: '-120px' }}
+                transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute right-0 top-6 z-20"
+              >
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="w-64 rounded-2xl bg-paper/95 p-4 text-ink shadow-2xl ring-1 ring-mint/20 backdrop-blur"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-mint-deep">
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+                      </span>
+                      New txn
+                    </span>
+                    <span className="text-[10px] text-ink-fade">14:32</span>
+                  </div>
+                  <div className="mt-2 flex items-baseline justify-between">
+                    <span className="font-display text-2xl font-semibold">+£42.50</span>
+                    <span className="text-xs text-ink-muted">Visa ••4521</span>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12, x: 24 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true, margin: '-120px' }}
+                transition={{ duration: 0.9, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute right-2 bottom-10 z-20"
+              >
+                <motion.div
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+                  className="w-60 rounded-2xl bg-paper/95 p-4 text-ink shadow-2xl ring-1 ring-mint/20 backdrop-blur"
+                >
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-ink-fade">Settled today</p>
+                  <p className="mt-1 font-display text-2xl font-semibold">£1,422.30</p>
+                  <div className="mt-2 flex items-center gap-1.5 text-xs">
+                    <ArrowUpRight className="h-3 w-3 text-mint-deep" />
+                    <span className="font-semibold text-mint-deep">+12%</span>
+                    <span className="text-ink-fade">vs yesterday</span>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12, x: 24 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true, margin: '-120px' }}
+                transition={{ duration: 0.9, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute right-20 top-1/2 z-20 -translate-y-1/2"
+              >
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}
+                  className="rounded-2xl bg-paper/95 px-4 py-3 text-ink shadow-2xl ring-1 ring-mint/20 backdrop-blur"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-2 w-2 rounded-full bg-mint shadow-[0_0_12px_rgba(89,209,195,0.8)]" />
+                    <span className="text-xs font-semibold">4 terminals online</span>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* RIGHT — copy */}
+            <div>
+              <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-mint">
+                <span className="h-px w-8 bg-mint" />
+                Customer portal
+              </p>
+              <h2 className="mt-5 font-display text-balance text-[clamp(2.5rem,4.2vw,4.75rem)] font-semibold leading-[1.02] tracking-tight text-paper">
+                Your account,<br />your numbers,<br />
+                <span className="text-mint">in one place.</span>
+              </h2>
+              <p className="mt-6 max-w-xl text-pretty text-lg text-paper/70">
+                Sign in to see live settlements, manage terminals, check loan balances and raise support tickets — on any device.
+              </p>
+              <ul className="mt-10 grid max-w-xl grid-cols-2 gap-3 text-sm text-paper/90">
+                {PORTAL_FEATURES.map((line) => (
+                  <li key={line} className="inline-flex items-center gap-2">
+                    <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-mint text-ink">
+                      <Check className="h-3 w-3" strokeWidth={3} />
+                    </span>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <LinkButton to="/sign-in" variant="primary" size="lg">
+                  Sign in to your portal
+                </LinkButton>
+                <LinkButton to="/sign-up" variant="inverse" size="lg">
                   Create an account
                   <ArrowUpRight className="h-4 w-4" />
                 </LinkButton>
